@@ -23,11 +23,18 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    compile group: 'org.jsoup', name: 'jsoup', version: '1.12.1'
+    compile 'org.jsoup:jsoup:1.12.1'
+
+    def exposedVersion = '0.20.1'
+    compile "org.jetbrains.exposed:exposed-core:$exposedVersion"
+    compile "org.jetbrains.exposed:exposed-dao:$exposedVersion"
+    compile "org.jetbrains.exposed:exposed-jdbc:$exposedVersion"
+    compile "mysql:mysql-connector-java:5.1.46"
 }
 
 compileKotlin {
