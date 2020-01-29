@@ -1,0 +1,52 @@
+apply plugin: 'java'
+apply plugin: 'kotlin'
+apply plugin: 'application'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+buildscript {
+    ext.kotlin_version = '1.3.61'
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.github.jengelman.gradle.plugins:shadow:5.2.0"
+    }
+}
+
+group 'com.thebug'
+version '0.0.1'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile group: 'org.jsoup', name: 'jsoup', version: '1.12.1'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileJava {
+    sourceCompatibility JavaVersion.VERSION_1_8.toString()
+    targetCompatibility JavaVersion.VERSION_1_8.toString()
+}
+
+mainClassName = "ApplicationKt"
+shadowJar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+    archiveName = 'eurostreaming-bot-telegram.jar'
+}
+
+task stage(dependsOn: ['clean', 'shadowJar'])

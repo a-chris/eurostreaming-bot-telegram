@@ -1,0 +1,6 @@
+{
+  "name": "Eurostreaming Bot Telegram",
+  "description": "",
+  "image": "heroku/java",
+  "addons": []
+}
