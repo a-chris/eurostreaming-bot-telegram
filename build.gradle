@@ -40,8 +40,9 @@ dependencies {
 
     implementation "com.github.pengrad:java-telegram-bot-api:4.6.0"
 
-    def jacksonVersion = '2.10.2'
-    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion"
+    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.10.2"
+
+    implementation "org.koin:koin-core:2.0.1"
 }
 
 compileKotlin {

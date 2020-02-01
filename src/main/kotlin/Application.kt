@@ -1,15 +1,23 @@
-import config.ConfigurationHelper
+import di.koinModule
+import org.koin.core.KoinComponent
+import org.koin.core.context.startKoin
+import org.koin.core.inject
 import scraper.Scraper
-import service.database.MyDatabase
-import telegram.MyTelegramBot
 
-fun main() {
-    val configuration = ConfigurationHelper.get()
+class App : KoinComponent {
+    val scraper: Scraper by inject()
+}
+
+fun main(args: Array<String>?) {
+    startKoin {
+        modules(koinModule)
+    }
+
 //    val list = Scraper().getTodayEpisodes()
 //    MyDatabase.test()
 
 
-    Scraper().showExists("Vikings")
+    App().scraper.showExists("Vikings")
 
 
 //    val myBd = MyDatabase(configuration.database)

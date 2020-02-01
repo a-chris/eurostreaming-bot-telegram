@@ -6,10 +6,9 @@ import com.pengrad.telegrambot.model.MessageEntity
 import com.pengrad.telegrambot.model.Update
 import com.pengrad.telegrambot.request.SendMessage
 import config.TelegramConfiguration
-import service.ShowServiceImpl
-import service.database.MyDatabase
+import service.ShowService
 
-class MyTelegramBot(telegramConfiguration: TelegramConfiguration, private val myDb: MyDatabase) {
+class MyTelegramBot(telegramConfiguration: TelegramConfiguration, private val showService: ShowService) {
     private val bot = TelegramBot(telegramConfiguration.token)
 
     fun start() {
@@ -31,7 +30,7 @@ class MyTelegramBot(telegramConfiguration: TelegramConfiguration, private val my
     private fun commandHandler(update: Update) {
         val text = update.message().text()
         val showName = removeCommandText(text)
-        val showExists = ShowServiceImpl(myDb).showExists(showName)
+        val showExists = showService.showExists(showName)
         val responseText = if (showExists) {
             "Following $showName"
         } else {
