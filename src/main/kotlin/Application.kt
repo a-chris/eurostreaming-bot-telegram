@@ -1,9 +1,17 @@
-import database.MyDatabase
-import org.jsoup.Jsoup
-import org.jsoup.nodes.Element
+import config.ConfigurationHelper
 import scraper.Scraper
+import service.database.MyDatabase
+import telegram.MyTelegramBot
 
 fun main() {
+    val configuration = ConfigurationHelper.get()
 //    val list = Scraper().getTodayEpisodes()
-    MyDatabase.test()
+//    MyDatabase.test()
+
+
+    Scraper().showExists("Vikings")
+
+
+//    val myBd = MyDatabase(configuration.database)
+//    MyTelegramBot(configuration.telegram, myBd).start()
 }
