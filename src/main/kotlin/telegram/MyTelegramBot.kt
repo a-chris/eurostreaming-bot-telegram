@@ -4,17 +4,19 @@ import com.pengrad.telegrambot.TelegramBot
 import com.pengrad.telegrambot.UpdatesListener
 import com.pengrad.telegrambot.model.MessageEntity
 import com.pengrad.telegrambot.model.Update
+import com.pengrad.telegrambot.request.DeleteWebhook
 import com.pengrad.telegrambot.request.SendMessage
-import com.pengrad.telegrambot.request.SetWebhook
 import config.TelegramConfiguration
 import service.ShowService
 
 class MyTelegramBot(private val telegramConfiguration: TelegramConfiguration, private val showService: ShowService) {
     private val bot = TelegramBot(telegramConfiguration.token)
 
+
     fun start() {
         val (token, appUrl) = telegramConfiguration
-        bot.execute(SetWebhook().url("$appUrl/$token"))
+        bot.execute(DeleteWebhook())
+//        bot.execute(SetWebhook().url("$appUrl/$token"))
         bot.setUpdatesListener { updates ->
             updates?.forEach {
                 val entities = it.message().entities()

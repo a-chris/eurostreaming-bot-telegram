@@ -15,13 +15,8 @@ fun main(args: Array<String>?) {
         modules(koinModule)
     }
 
-//    val list = Scraper().getTodayEpisodes()
-//    MyDatabase.test()
-
     with(App()) {
         scraper.showExists("Vikings")
         telegramBot.start()
     }
-//    val myBd = MyDatabase(configuration.database)
-
 }
