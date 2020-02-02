@@ -3,9 +3,11 @@ import org.koin.core.KoinComponent
 import org.koin.core.context.startKoin
 import org.koin.core.inject
 import scraper.Scraper
+import telegram.MyTelegramBot
 
 class App : KoinComponent {
     val scraper: Scraper by inject()
+    val telegramBot: MyTelegramBot by inject()
 }
 
 fun main(args: Array<String>?) {
@@ -16,10 +18,10 @@ fun main(args: Array<String>?) {
 //    val list = Scraper().getTodayEpisodes()
 //    MyDatabase.test()
 
-
-    App().scraper.showExists("Vikings")
-
-
+    with(App()) {
+        scraper.showExists("Vikings")
+        telegramBot.start()
+    }
 //    val myBd = MyDatabase(configuration.database)
-//    MyTelegramBot(configuration.telegram, myBd).start()
+
 }
