@@ -19,4 +19,6 @@ fun main(args: Array<String>?) {
         scraper.showExists("Vikings")
         telegramBot.start()
     }
+
+    println("I'm listening!")
 }

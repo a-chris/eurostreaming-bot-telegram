@@ -10,7 +10,6 @@ import telegram.MyTelegramBot
 
 val configuration = ConfigurationHelper.get()
 val koinModule = module {
-    single { ConfigurationHelper.get() }
     single { MyDatabase(configuration.database) }
     single { Scraper() }
 
