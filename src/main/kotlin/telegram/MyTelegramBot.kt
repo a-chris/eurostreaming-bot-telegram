@@ -14,7 +14,6 @@ class MyTelegramBot(private val telegramConfiguration: TelegramConfiguration, pr
 
 
     fun start() {
-        val (token, appUrl) = telegramConfiguration
         bot.execute(DeleteWebhook())
 //        bot.execute(SetWebhook().url("$appUrl/$token"))
         bot.setUpdatesListener { updates ->
