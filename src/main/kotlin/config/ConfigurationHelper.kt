@@ -4,7 +4,8 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import java.io.File
 
 data class TelegramConfiguration(
-    val token: String
+    val token: String,
+    val appUrl: String
 )
 
 data class DbConfiguration(
