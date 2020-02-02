@@ -3,18 +3,32 @@ package service.database.model
 import org.jetbrains.exposed.sql.Column
 import org.jetbrains.exposed.sql.Table
 
-object User : Table("user") {
-    val id: Column<String> = varchar("id_telegram", 100)
+object UserTable : Table("user") {
+    val id: Column<Long> = long("id_telegram")
     override val primaryKey: PrimaryKey = PrimaryKey(id)
 }
 
-object Show : Table("show") {
+object ShowTable : Table("show") {
     val name: Column<String> = varchar("name", 100)
     override val primaryKey: PrimaryKey = PrimaryKey(name)
 }
 
-object UserShow: Table("user_show") {
-    val userId: Column<String> = varchar("user_pk", 100)
+object EpisodeTable: Table("episode") {
+    val name: Column<String> = varchar("name", 50)
+    val url: Column<String?> = varchar("url", 100).nullable()
+    val show: Column<String> = varchar("show_pk", 100)
+
+    override val primaryKey: PrimaryKey = PrimaryKey(name)
+}
+
+object UserShowTable: Table("user_show") {
+    val userId: Column<Long> = long("user_pk")
     val showId: Column<String> = varchar("show_pk", 100)
     override val primaryKey = PrimaryKey(userId, showId)
+}
+
+object UserEpisodeNotifiedTable: Table("user_episode_notified") {
+    val userId: Column<Long> = long("user_pk")
+    val episodeId: Column<String> = varchar("episode_pk", 100)
+    override val primaryKey = PrimaryKey(userId, episodeId)
 }

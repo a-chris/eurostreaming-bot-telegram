@@ -1,7 +1,7 @@
 package service.database
 
 import config.DbConfiguration
-import service.database.model.UserShow
+import service.database.model.UserShowTable
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -20,7 +20,7 @@ class MyDatabase(configuration: DbConfiguration) {
     fun test() {
 
         transaction(db) {
-            UserShow.selectAll().forEach { println(it) }
+            UserShowTable.selectAll().forEach { println(it) }
         }
     }
 

@@ -36,8 +36,6 @@ dependencies {
     compile "org.jetbrains.exposed:exposed-jdbc:$exposedVersion"
     compile "mysql:mysql-connector-java:5.1.46"
 
-    implementation "com.squareup.moshi:moshi-kotlin:1.9.2"
-
     implementation "com.github.pengrad:java-telegram-bot-api:4.6.0"
 
     implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.10.2"
