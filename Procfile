@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT $JAVA_OPTS -jar build/libs/eurostreaming-bot-telegram.jar
+worker: java -Dserver.port=$PORT $JAVA_OPTS -jar build/libs/eurostreaming-bot-telegram.jar
