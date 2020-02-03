@@ -14,11 +14,11 @@ object ShowTable : Table("show") {
 }
 
 object EpisodeTable: Table("episode") {
-    val name: Column<String> = varchar("name", 50)
+    val episodeName: Column<String> = varchar("name", 50)
     val url: Column<String?> = varchar("url", 100).nullable()
-    val show: Column<String> = varchar("show_pk", 100)
+    val showName: Column<String> = varchar("show_pk", 100)
 
-    override val primaryKey: PrimaryKey = PrimaryKey(name)
+    override val primaryKey: PrimaryKey = PrimaryKey(episodeName)
 }
 
 object UserShowTable: Table("user_show") {

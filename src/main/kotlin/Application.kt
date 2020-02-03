@@ -36,11 +36,15 @@ fun main(args: Array<String>?) {
 private fun loop() {
     runBlocking {
         while (true) {
+            println("Looping")
             val newEpisodes = App.episodeService.findNewEpisodes()
             newEpisodes.forEach { episode ->
                 val usersToNotify = App.userShowService.getUserFollowingShow(episode.showName)
                 usersToNotify.forEach { user ->
-                    App.telegramBot.sendMessage(user.chatId, "New episode of ${episode.title} is online")
+                    App.telegramBot.sendMessage(user.chatId, "New episode of ${episode.episodeName} is online")
+                    if (!App.episodeService.episodeExists(episode.episodeName)) {
+                        App.episodeService.addEpisode(episode)
+                    }
                 }
             }
             delay(App.configuration.interval)
