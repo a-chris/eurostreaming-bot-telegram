@@ -1,5 +1,6 @@
 package service
 
+import model.Show
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -9,7 +10,7 @@ import service.database.model.ShowTable
 
 interface ShowService {
     fun showExists(showName: String): Boolean
-
+    fun addShow(show: Show)
 }
 
 class ShowServiceImpl(private val db: MyDatabase, private val scraper: Scraper) : ShowService {
@@ -23,16 +24,16 @@ class ShowServiceImpl(private val db: MyDatabase, private val scraper: Scraper) 
         } else {
             val resultFromScraper = scraper.showExists(showName)
             if (resultFromScraper) {
-                addShow(showName)
+                addShow(Show(showName))
             }
             resultFromScraper
         }
     }
 
-    private fun addShow(showName: String) {
+    override fun addShow(show: Show) {
         transaction(db.get()) {
             ShowTable.insert {
-                it[name] = showName
+                it[name] = show.name
             }
         }
     }

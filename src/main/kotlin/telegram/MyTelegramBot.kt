@@ -1,5 +1,6 @@
 package telegram
 
+import MyStrings
 import com.pengrad.telegrambot.TelegramBot
 import com.pengrad.telegrambot.UpdatesListener
 import com.pengrad.telegrambot.model.MessageEntity
@@ -7,7 +8,6 @@ import com.pengrad.telegrambot.model.Update
 import com.pengrad.telegrambot.request.SendMessage
 import com.pengrad.telegrambot.response.SendResponse
 import config.TelegramConfiguration
-import model.User
 import service.ShowService
 import service.UserService
 
@@ -25,32 +25,29 @@ class MyTelegramBot(
         bot.setUpdatesListener { updates ->
             updates?.forEach {
                 val entities = it.message().entities()
-                if (!entities.isNullOrEmpty() && entities[0].type() == MessageEntity.Type.bot_command) {
-                    commandHandler(it)
+                val response = if (!entities.isNullOrEmpty() && entities[0].type() == MessageEntity.Type.bot_command) {
+                    executeCommand(it)
                 } else {
-                    val text = it.message().text()
-                    sendMessage(it.message().chat().id(), text)
+                    MyStrings.Error.BAD_COMMAND
                 }
+                sendMessage(it.message().chat().id(), response)
             }
             UpdatesListener.CONFIRMED_UPDATES_ALL
         }
     }
 
-    private fun commandHandler(update: Update) {
-        val text = update.message().text()
-        val showName = removeCommandText(text)
-        val showExists = showService.showExists(showName)
-        val userId = update.message().chat().id()
-        if (!userService.userExists(userId)) {
-            // adds user to the db if it doesn't exist
-            userService.addUser(User(update.message().chat().id()))
+    private fun executeCommand(update: Update): String {
+        val words = update.message().text().split(" ")
+        if (words.isEmpty() || words.size == 1) {
+            return MyStrings.Error.MISSING_ARGUMENT
         }
-        val responseText = if (showExists) {
-            "Following $showName"
-        } else {
-            "Show $showName doesn't exist yet"
+        val chatId = update.message().chat().id()
+        val textAfterCommand = words.toMutableList().apply { removeAt(0) }.joinToString(" ")
+        return when (words[0]) {
+            "/start" -> StartHandler().handleCommand(chatId, textAfterCommand)
+            "/follow" -> FollowingHandler().handleCommand(chatId, textAfterCommand)
+            else -> MyStrings.Error.BAD_COMMAND
         }
-        sendMessage(update.message().chat().id(), responseText)
     }
 
     private fun removeCommandText(message: String) =

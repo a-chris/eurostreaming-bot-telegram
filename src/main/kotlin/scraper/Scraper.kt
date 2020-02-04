@@ -29,8 +29,8 @@ class Scraper {
     fun showExists(showName: String): Boolean {
         val document = Jsoup.connect("$SEARCH_SHOW$showName").get()
         val posts = document.body().selectFirst(".recent-posts").children()
-        val shows = posts.map { it.selectFirst(".post-content h2 a").ownText() }.toSet()
-        return shows.contains(showName)
+        val shows = posts.map { it.selectFirst(".post-content h2 a").ownText().toLowerCase() }.toSet()
+        return shows.contains(showName.toLowerCase())
     }
 
     private fun toEpisode(element: Element): Episode {

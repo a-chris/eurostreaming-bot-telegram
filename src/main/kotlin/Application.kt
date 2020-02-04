@@ -26,7 +26,6 @@ fun main(args: Array<String>?) {
     }
 
     with(App) {
-        scraper.showExists("Vikings")
         telegramBot.start()
     }
     println("I'm listening!")
@@ -41,7 +40,7 @@ private fun loop() {
             newEpisodes.forEach { episode ->
                 val usersToNotify = App.userShowService.getUserFollowingShow(episode.showName)
                 usersToNotify.forEach { user ->
-                    App.telegramBot.sendMessage(user.chatId, "New episode of ${episode.episodeName} is online")
+                    App.telegramBot.sendMessage(user.id, "New episode of ${episode.episodeName} is online")
                     if (!App.episodeService.episodeExists(episode.episodeName)) {
                         App.episodeService.addEpisode(episode)
                     }

@@ -17,7 +17,7 @@ class UserServiceImpl(private val myDb: MyDatabase) : UserService {
     override fun addUser(user: User) {
         transaction(myDb.get()) {
             UserTable.insert {
-                it[id] = user.chatId
+                it[id] = user.id
             }
         }
     }
