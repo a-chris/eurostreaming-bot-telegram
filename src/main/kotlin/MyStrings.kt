@@ -4,5 +4,6 @@ object MyStrings {
         const val MISSING_ARGUMENT = "Argomento del comando mancante."
         const val BAD_SHOW_NAME = "Serie non esistente."
         const val USER_SHOW_ALREADY_EXISTS = "Stai già seguendo questa serie."
+        const val USER_NOT_FOLLOWING_SHOW = "Non stavi seguendo questa serie."
     }
 }

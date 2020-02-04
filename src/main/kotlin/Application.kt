@@ -38,7 +38,7 @@ private fun loop() {
             println("Looping")
             val newEpisodes = App.episodeService.findNewEpisodes()
             newEpisodes.forEach { episode ->
-                val usersToNotify = App.userShowService.getUserFollowingShow(episode.showName)
+                val usersToNotify = App.userShowService.getUsersFollowingShow(episode.showName)
                 usersToNotify.forEach { user ->
                     App.telegramBot.sendMessage(user.id, "New episode of ${episode.episodeName} is online")
                     if (!App.episodeService.episodeExists(episode.episodeName)) {

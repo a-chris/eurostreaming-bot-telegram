@@ -20,6 +20,6 @@ val koinModule = module {
     single<UserShowService> { UserShowServiceImpl(get()) }
 
     /* Telegram */
-    single { MyTelegramBot(configuration.telegram, get(), get()) }
+    single { MyTelegramBot(configuration.telegram) }
 
 }

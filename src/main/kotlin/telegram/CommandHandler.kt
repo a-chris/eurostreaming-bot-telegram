@@ -41,5 +41,18 @@ class FollowingHandler : CommandHandler() {
         }
         return "Following $textAfterCommand"
     }
+}
 
+class UnfollowingHandler : CommandHandler() {
+    override fun handleCommand(chatId: Long, textAfterCommand: String): String {
+        if (!showService.showExists(textAfterCommand)) {
+            return MyStrings.Error.BAD_SHOW_NAME
+        }
+        val userShow = UserShow(chatId, textAfterCommand)
+        if (!userService.userExists(chatId) || !userShowService.userShowExists(userShow)) {
+            return MyStrings.Error.USER_NOT_FOLLOWING_SHOW
+        }
+        userShowService.removeUserFollowingShow(userShow)
+        return "Unfollowing $textAfterCommand"
+    }
 }
