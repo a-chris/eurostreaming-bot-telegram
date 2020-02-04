@@ -53,6 +53,6 @@ class UnfollowingHandler : CommandHandler() {
             return MyStrings.Error.USER_NOT_FOLLOWING_SHOW
         }
         userShowService.removeUserFollowingShow(userShow)
-        return "Unfollowing $textAfterCommand"
+        return "Hai smesso di seguire $textAfterCommand"
     }
 }
