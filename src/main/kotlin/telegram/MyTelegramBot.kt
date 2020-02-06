@@ -38,15 +38,16 @@ class MyTelegramBot(telegramConfiguration: TelegramConfiguration) {
 
     private fun executeCommand(update: Update): String {
         val words = update.message().text().split(" ")
-        if (words[0] != "/start" && (words.isEmpty() || words.size == 1)) {
+        if (words.isEmpty()) {
             return MyStrings.Error.MISSING_ARGUMENT
         }
         val chatId = update.message().chat().id()
-        val textAfterCommand = words.toMutableList().apply { removeAt(0) }.joinToString(" ")
+        val textAfterCommand = words.subList(1, words.size).joinToString(" ")
         return when (words[0]) {
             "/start" -> StartHandler().handleCommand(chatId, textAfterCommand)
             "/follow" -> FollowingHandler().handleCommand(chatId, textAfterCommand)
             "/unfollow" -> UnfollowingHandler().handleCommand(chatId, textAfterCommand)
+            "/list" -> ListHandler().handleCommand(chatId, textAfterCommand)
             else -> MyStrings.Error.BAD_COMMAND
         }
     }

@@ -1,5 +1,6 @@
 package service
 
+import model.Show
 import model.User
 import model.UserShow
 import org.jetbrains.exposed.sql.*
@@ -12,6 +13,7 @@ interface UserShowService {
     fun userShowExists(userShow: UserShow): Boolean
     fun addUserFollowingShow(userShow: UserShow)
     fun removeUserFollowingShow(userShow: UserShow)
+    fun showsFollowedByUser(userId: Long): List<Show>
 }
 
 class UserShowServiceImpl(private val myDb: MyDatabase) : UserShowService {
@@ -46,4 +48,9 @@ class UserShowServiceImpl(private val myDb: MyDatabase) : UserShowService {
             }
         }
     }
+
+    override fun showsFollowedByUser(userId: Long) =
+        transaction(myDb.get()) {
+            UserShowTable.select { UserShowTable.userId eq userId }.map { Show(it[UserShowTable.showId]) }
+        }
 }

@@ -56,3 +56,13 @@ class UnfollowingHandler : CommandHandler() {
         return "Hai smesso di seguire $textAfterCommand"
     }
 }
+
+class ListHandler : CommandHandler() {
+    override fun handleCommand(chatId: Long, textAfterCommand: String): String {
+        if (!userService.userExists(chatId)) {
+            return MyStrings.Error.USER_NOT_FOLLOWING_SHOW
+        }
+        val showsFollowed = userShowService.showsFollowedByUser(chatId)
+        return "Stai seguendo ${showsFollowed.size} serie:\n" + showsFollowed.joinToString("\n") { "- ${it.name}" }
+    }
+}
