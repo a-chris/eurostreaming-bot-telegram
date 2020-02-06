@@ -40,7 +40,11 @@ private fun loop() {
             newEpisodes.forEach { episode ->
                 val usersToNotify = App.userShowService.getUsersFollowingShow(episode.showName)
                 usersToNotify.forEach { user ->
-                    App.telegramBot.sendMessage(user.id, "New episode of ${episode.episodeName} is online")
+                    App.telegramBot.sendMessage(
+                        user.id,
+                        "Un nuovo episodio di ${episode.showName} è online:\n" +
+                                episode.episodeName
+                    )
                     if (!App.episodeService.episodeExists(episode.episodeName)) {
                         App.episodeService.addEpisode(episode)
                     }
