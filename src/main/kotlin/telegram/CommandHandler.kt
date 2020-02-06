@@ -39,7 +39,7 @@ class FollowingHandler : CommandHandler() {
         } else {
             userShowService.addUserFollowingShow(currentUserShow)
         }
-        return "Following $textAfterCommand"
+        return "Hai iniziato a seguire $textAfterCommand"
     }
 }
 
