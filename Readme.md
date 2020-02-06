@@ -1,7 +1,7 @@
 # Eurostreaming Bot Telegram
 
 #### A Telegram Bot to follow your preferred shows episodes uploaded on the [Eurostreaming Site](https://eurostreaming.pink)
-made with 
+<p align="center">made with :heart: using Kotlin</p>
 
 ### WHY
 The project started as a hobby project to try some funny technologies like Kotlin, Exposed and Koin. Plus, I really like automation, so here we are.
