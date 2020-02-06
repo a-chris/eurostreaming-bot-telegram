@@ -52,6 +52,11 @@ class UnfollowingHandler : CommandHandler() {
         if (!userService.userExists(chatId) || !userShowService.userShowExists(userShow)) {
             return MyStrings.Error.USER_NOT_FOLLOWING_SHOW
         }
+        // if the user is following only one show then remove the user too
+        if (userShowService.showsFollowedByUser(chatId).size == 1) {
+            userShowService.removeUserFollowingShow(userShow)
+            userService.removeUser(chatId)
+        }
         userShowService.removeUserFollowingShow(userShow)
         return "Hai smesso di seguire $textAfterCommand"
     }
@@ -63,6 +68,7 @@ class ListHandler : CommandHandler() {
             return MyStrings.Error.USER_NOT_FOLLOWING_SHOW
         }
         val showsFollowed = userShowService.showsFollowedByUser(chatId)
-        return "Stai seguendo ${showsFollowed.size} serie:\n" + showsFollowed.joinToString("\n") { "- ${it.name}" }
+        return "Stai seguendo ${showsFollowed.size} serie:\n" +
+                showsFollowed.joinToString("\n") { "- ${it.name}" }
     }
 }
