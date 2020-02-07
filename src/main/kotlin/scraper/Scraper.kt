@@ -4,7 +4,7 @@ import model.Episode
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 
-private const val SITE = "https://eurostreaming.pink/"
+private const val SITE = "https://eurostreaming.live/"
 private const val EPISODES = SITE + "aggiornamento-episodi/"
 private const val SEARCH_SHOW = "$SITE?s="
 

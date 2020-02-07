@@ -43,7 +43,7 @@ private fun loop() {
                     App.telegramBot.sendMessage(
                         user.id,
                         "Un nuovo episodio di ${episode.showName} è online:\n" +
-                                episode.episodeName
+                                """<a href="${episode.url}">${episode.episodeName}</a>"""
                     )
                     if (!App.episodeService.episodeExists(episode.episodeName)) {
                         App.episodeService.addEpisode(episode)

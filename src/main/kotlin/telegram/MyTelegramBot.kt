@@ -5,6 +5,7 @@ import com.pengrad.telegrambot.TelegramBot
 import com.pengrad.telegrambot.UpdatesListener
 import com.pengrad.telegrambot.model.MessageEntity
 import com.pengrad.telegrambot.model.Update
+import com.pengrad.telegrambot.model.request.ParseMode
 import com.pengrad.telegrambot.request.GetChatMembersCount
 import com.pengrad.telegrambot.request.GetMe
 import com.pengrad.telegrambot.request.SendMessage
@@ -15,7 +16,11 @@ class MyTelegramBot(telegramConfiguration: TelegramConfiguration) {
     private val bot = TelegramBot(telegramConfiguration.token)
 
     fun sendMessage(chatId: Long, message: String): SendResponse =
-        bot.execute(SendMessage(chatId, message))
+        bot.execute(
+            SendMessage(chatId, message)
+                .parseMode(ParseMode.HTML)
+                .disableWebPagePreview(true)
+        )
 
     fun start() {
         val id = bot.execute(GetMe()).user().id()
