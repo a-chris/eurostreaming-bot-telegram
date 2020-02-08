@@ -21,7 +21,12 @@ abstract class CommandHandler : KoinComponent {
 
 class StartHandler : CommandHandler() {
     override fun handleCommand(chatId: Long, textAfterCommand: String): String =
-        "Benvenuto!"
+        "Benvenuto!\n\n" +
+                "Inizia a seguire la tua serie preferita con il comando <b>/follow</b> seguito dal nome della serie.\n\n" +
+                "I comandi disponibili sono:\n" +
+                "- <b>/follow nome_serie</b>: Inizia a seguire una serie.\n" +
+                "- <b>/unfollow nome_serie</b>: Smetti di seguire una serie.\n" +
+                "- <b>/list</b>: Lista di serie che stai seguendo."
 }
 
 class FollowingHandler : CommandHandler() {
