@@ -10,6 +10,7 @@ import service.database.model.ShowTable
 
 interface ShowService {
     fun showExists(showName: String): Boolean
+    fun findSimilarShows(showName: String): List<Show>
     fun addShow(show: Show)
 }
 
@@ -29,6 +30,13 @@ class ShowServiceImpl(private val db: MyDatabase, private val scraper: Scraper) 
             resultFromScraper
         }
     }
+
+    override fun findSimilarShows(showName: String): List<Show> =
+        transaction(db.get()) {
+            ShowTable
+                .select { ShowTable.name like "%${showName}%" }
+                .map { Show(it[ShowTable.name]) }
+        }
 
     override fun addShow(show: Show) {
         transaction(db.get()) {
