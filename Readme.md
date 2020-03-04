@@ -9,7 +9,7 @@
 The project started as a hobby project to try some funny technologies like Kotlin, Exposed and Koin, plus I really like automation, so here we are.
 
 ### USAGE
-You can find the bot with the name **Eurostreaming Bot**.
+You can find the bot with the name **EuroStreaming_thebug_bot** or by using [this link](https://t.me/EuroStreaming_thebug_bot)
 <p align="center">
     <img width="300" height="250" src="readme/find_the_bot.jpg">
 </p>
