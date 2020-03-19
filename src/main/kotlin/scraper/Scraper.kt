@@ -4,11 +4,10 @@ import model.Episode
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 
-private const val SITE = "https://eurostreaming.live/"
-private const val EPISODES = SITE + "aggiornamento-episodi/"
-private const val SEARCH_SHOW = "$SITE?s="
+class Scraper(siteUrl: String) {
 
-class Scraper {
+    private val EPISODES = siteUrl + "aggiornamento-episodi/"
+    private val SEARCH_SHOW = "$siteUrl?s="
 
     fun getTodayEpisodes(): List<Episode> {
         val document = Jsoup.connect(EPISODES).get()
