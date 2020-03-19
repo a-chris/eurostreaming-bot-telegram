@@ -17,7 +17,8 @@ data class DbConfiguration(
 data class Configuration(
     val interval: Long,
     val telegram: TelegramConfiguration,
-    val database: DbConfiguration
+    val database: DbConfiguration,
+    val siteUrl: String
 )
 
 private const val DEFAULT_INTERVAL = 1_800_000L // default interval is half an hour
@@ -46,7 +47,8 @@ object ConfigurationHelper {
                     get("DB_PSWD").toString()
                 )
                 val telegramConfiguration = TelegramConfiguration(get("TELEGRAM_TOKEN").toString())
-                Configuration(interval, telegramConfiguration, dbConfiguration)
+                val siteUrl = get("SITE_URL") ?: ""
+                Configuration(interval, telegramConfiguration, dbConfiguration, siteUrl)
             }
         }
     }
