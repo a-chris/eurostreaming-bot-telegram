@@ -34,6 +34,7 @@ fun main(args: Array<String>?) {
 
 private fun loop() {
     runBlocking {
+        App.scraper.getSiteUrl()
         while (true) {
             println("Looping")
             val newEpisodes = App.episodeService.findNewEpisodes()
