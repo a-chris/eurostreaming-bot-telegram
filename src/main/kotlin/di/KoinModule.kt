@@ -11,7 +11,7 @@ val configuration = ConfigurationHelper.get()
 val koinModule = module {
     single { configuration }
     single { MyDatabase(configuration.database) }
-    single { Scraper(configuration.siteUrl) }
+    single { Scraper() }
 
     /* Services */
     single<UserService> { UserServiceImpl(get()) }
