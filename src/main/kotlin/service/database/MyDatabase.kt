@@ -17,13 +17,4 @@ class MyDatabase(configuration: DbConfiguration) {
 
     fun get() = db
 
-    fun test() {
-
-        transaction(db) {
-            UserShowTable.selectAll().forEach { println(it) }
-        }
-    }
-
-
-
 }
