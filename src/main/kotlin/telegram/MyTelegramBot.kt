@@ -49,7 +49,7 @@ class MyTelegramBot(telegramConfiguration: TelegramConfiguration) {
         val chatId = update.message().chat().id()
         val textAfterCommand = words.subList(1, words.size).joinToString(" ")
         return when (words[0]) {
-            "/start" -> StartHandler().handleCommand(chatId, textAfterCommand)
+            "/help" -> HelpHandler().handleCommand(chatId, textAfterCommand)
             "/follow" -> FollowingHandler().handleCommand(chatId, textAfterCommand)
             "/unfollow" -> UnfollowingHandler().handleCommand(chatId, textAfterCommand)
             "/list" -> ListHandler().handleCommand(chatId, textAfterCommand)
