@@ -32,7 +32,13 @@ class StartHandler : CommandHandler() {
 class FollowingHandler : CommandHandler() {
     override fun handleCommand(chatId: Long, textAfterCommand: String): String {
         if (!showService.showExists(textAfterCommand)) {
-            return MyStrings.Error.BAD_SHOW_NAME
+            val similarShows = showService.findSimilarShows(textAfterCommand)
+            return if (similarShows.isEmpty())
+                MyStrings.Error.BAD_SHOW_NAME
+            else
+                "${MyStrings.Error.BAD_SHOW_NAME}\n" +
+                        "Ecco alcuni suggerimenti:\n" +
+                        similarShows.joinToString("\n") { "- ${it.name}" }
         }
         if (!userService.userExists(chatId)) {
             // adds user to the db if it doesn't exist

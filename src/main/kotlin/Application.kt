@@ -1,3 +1,4 @@
+
 import config.Configuration
 import di.koinModule
 import kotlinx.coroutines.delay
@@ -34,7 +35,6 @@ fun main(args: Array<String>?) {
 
 private fun loop() {
     runBlocking {
-        App.scraper.getSiteUrl()
         while (true) {
             println("Looping")
             val newEpisodes = App.episodeService.findNewEpisodes()
