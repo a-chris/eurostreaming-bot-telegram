@@ -7,24 +7,17 @@ import org.jsoup.nodes.Element
 private const val GET_LATEST_URL = "https://eurostreaming.link"
 
 class Scraper() {
-    private var siteUrl: String
-    private var episodesUrl: String
-    private var searchShowUrl: String
+    private val episodesUrl = { "${getSiteUrl()}aggiornamento-episodi/" }
+    private val searchShowUrl = { "${getSiteUrl()}?s=" }
 
-    init {
-        siteUrl = getSiteUrl()
-        episodesUrl = siteUrl + "aggiornamento-episodi/"
-        searchShowUrl = "$siteUrl?s="
-    }
-
-    fun getSiteUrl(): String {
+    private fun getSiteUrl(): String {
         val url = Jsoup.connect(GET_LATEST_URL).followRedirects(true).execute().url()
         val eurostreamingSite = url?.query?.substringAfter("site:")
         return "https://${eurostreamingSite}/"
     }
 
     fun getTodayEpisodes(): List<Episode> {
-        val document = Jsoup.connect(episodesUrl).get()
+        val document = Jsoup.connect(episodesUrl()).get()
         val list = mutableListOf<Element>()
         val elements = document.body().selectFirst("div.entry").children()
         var hasH4 = false
@@ -40,7 +33,7 @@ class Scraper() {
     }
 
     fun showExists(showName: String): Boolean {
-        val document = Jsoup.connect("$searchShowUrl$showName").get()
+        val document = Jsoup.connect("${searchShowUrl()}$showName").get()
         val posts = document.body().selectFirst(".recent-posts").children()
         val shows = posts.map { it.selectFirst(".post-content h2 a").ownText().toLowerCase() }.toSet()
         return shows.contains(showName.toLowerCase())
