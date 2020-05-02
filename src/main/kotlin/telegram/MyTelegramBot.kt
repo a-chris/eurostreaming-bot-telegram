@@ -28,14 +28,16 @@ class MyTelegramBot(telegramConfiguration: TelegramConfiguration) {
         println("Users count: $usersCount")
 
         bot.setUpdatesListener { updates ->
-            updates?.forEach {
-                val entities = it.message().entities()
+            updates?.forEach { update ->
+                val entities = update?.message()?.entities()
                 val response = if (!entities.isNullOrEmpty() && entities[0].type() == MessageEntity.Type.bot_command) {
-                    executeCommand(it)
+                    executeCommand(update)
                 } else {
                     MyStrings.Error.BAD_COMMAND
                 }
-                sendMessage(it.message().chat().id(), response)
+                update?.message()?.chat()?.id()?.let { chatId ->
+                    sendMessage(chatId, response)
+                }
             }
             UpdatesListener.CONFIRMED_UPDATES_ALL
         }

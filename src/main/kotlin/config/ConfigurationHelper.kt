@@ -29,13 +29,13 @@ object ConfigurationHelper {
 
     fun get(): Configuration {
         val file = try {
-            File(".\\config.json")
+            File(".${File.separator}config.json")
         } catch (exception: RuntimeException) {
             null
         }
         return if (file != null && file.exists()) {
             //DEV mode
-            return objectMapper.readValue(file, Configuration::class.java)
+            objectMapper.readValue(file, Configuration::class.java)
         } else {
             // PROD mode
             return with(System.getenv()) {
