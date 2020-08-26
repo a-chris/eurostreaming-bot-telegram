@@ -3,4 +3,5 @@ build
 .idea
 out
 *.iml
-config.json
+*.json
+*.db

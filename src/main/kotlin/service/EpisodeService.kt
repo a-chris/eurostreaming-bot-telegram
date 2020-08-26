@@ -1,9 +1,7 @@
 package service
 
 import model.Episode
-import org.jetbrains.exposed.sql.batchInsert
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import scraper.Scraper
 import service.database.MyDatabase
@@ -25,7 +23,7 @@ class EpisodeServiceImpl(private val myDb: MyDatabase, private val scraper: Scra
     override fun findNewEpisodes(): List<Episode> =
         transaction(myDb.get()) {
             scraper.getTodayEpisodes()
-                .filter { EpisodeTable.select { EpisodeTable.episodeName eq it.episodeName }.count() == 0 }
+                .filter { EpisodeTable.select { EpisodeTable.episodeName eq it.episodeName }.count() == 0L }
         }
 
     override fun addEpisode(episode: Episode) {

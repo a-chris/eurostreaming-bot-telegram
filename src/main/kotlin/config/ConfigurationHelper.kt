@@ -10,8 +10,8 @@ data class TelegramConfiguration(
 data class DbConfiguration(
     val url: String,
     val driver: String,
-    val user: String,
-    val password: String
+    val user: String?,
+    val password: String?
 )
 
 data class Configuration(

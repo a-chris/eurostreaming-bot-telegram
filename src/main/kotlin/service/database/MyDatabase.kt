@@ -1,19 +1,23 @@
 package service.database
 
 import config.DbConfiguration
-import service.database.model.UserShowTable
 import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.selectAll
-import org.jetbrains.exposed.sql.transactions.transaction
+import org.jetbrains.exposed.sql.transactions.TransactionManager
+import java.sql.Connection
 
 class MyDatabase(configuration: DbConfiguration) {
 
     private val db = Database.connect(
         configuration.url,
         configuration.driver,
-        configuration.user,
-        configuration.password
+        configuration.user ?: "",
+        configuration.password ?: ""
     )
+
+    init {
+        TransactionManager.manager.defaultIsolationLevel =
+            Connection.TRANSACTION_SERIALIZABLE
+    }
 
     fun get() = db
 
