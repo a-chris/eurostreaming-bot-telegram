@@ -4,19 +4,15 @@
 
 <p align="center">made with :heart: using Kotlin</p>
 
-### WHY
+### Why
 
 **I'm not the owner or a contributor of the eurostreaming site, all the data are gathered using a web scraper. I have nothing to do with any illegal content uploaded on the site.**
 
 The project started as a hobby project to try some funny technologies like Kotlin, Exposed and Koin, plus I really like automation, so here we are.
 
-### USAGE
+**I won't share the public link nor the bot name anymore, this bot will live for personal use only. If you want to use it you can clone the code and execute it on your device/server/whatever.**
 
-You can find the bot with the name **EuroStreaming_thebug_bot** or by using [this link](https://t.me/EuroStreaming_thebug_bot).
-
-<p align="center">
-    <img width="300" height="250" src="readme/find_the_bot.jpg">
-</p>
+### Usage
 
 Just run the bot on your Telegram app and send **/follow show_name** to start following a show. You will receive a notification when a new episode of the show is online.
 
@@ -27,7 +23,7 @@ Available commands are:
 - **/unfollow**: Stop following a show. Same rules as the /follow command.
 - **/list**: Get a list of the shows you are following.
 
-### WHAT TO EXPECT
+### Features
 
 I have a few improvements and new features in mind, e.g.:
 
@@ -38,7 +34,7 @@ I have a few improvements and new features in mind, e.g.:
 - [ ] Notify the user when the eurostreaming domain has changed
 - [ ] /stop command to remove all the user data
 
-### HOW IT WORKS
+### How it works
 
 #### Technologies
 
@@ -48,7 +44,6 @@ I have a few improvements and new features in mind, e.g.:
 - [Koin](https://jsoup.org/): to polite inject dependecies
 - [Java-telegram-bot](https://github.com/pengrad/java-telegram-bot-api): to works with Telegram Bot APIs
 
-#### 
 
 #### The core
 
@@ -74,6 +69,7 @@ The eurostreaming site is often DNS-obscured in Italy. This problem is solved by
 
 
 
-### WHY THE BOT SPEAKS ITALIAN
+### Why the bot speaks italian
 
-The streaming site is Italian and share shows with Italian language, so I think it's obvious that the bot will only have italian users.
+The streaming site is Italian and share shows with Italian language, so I think the bot will only have italian users.
+

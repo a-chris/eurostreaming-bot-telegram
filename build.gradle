@@ -16,7 +16,7 @@ buildscript {
     }
 }
 
-group 'com.thebug'
+group 'com.achris'
 version '0.0.1'
 
 sourceCompatibility = 1.8
